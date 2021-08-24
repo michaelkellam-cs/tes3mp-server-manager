@@ -1,7 +1,7 @@
 Hello!
 
 This is my TES3MP Server Manager. This manager will allow you to start/stop your TES3MP server, view live server output, and view/manage players' data.
-DUe to this being iteration of the project, so some things may be missing or unfinished, but the core functionality and many useful features already exist.
+Due to this being the first iteration of the project, so some things may be missing or unfinished, but the core functionality and many useful features already exist.
 
 A few things to note due to the program's early state:
 - You will need to run the server using Linux. This is because of the way the program writes server commands. I will eventually write a wrapper class to allow for different kinds of OS's to work. I've run and tested this on Ubuntu, and so far this works with no problems.
