@@ -100,9 +100,9 @@ namespace TES3MP_GUI
             richTextBox1.Top = (playerButton.Top + playerButton.Height) + 3;
             richTextBox1.Left = (this.ClientSize.Width - richTextBox1.Width) / 2;
 
-            //MessageBox.Show("WARNING: This program is still in early development. It is highly recommended to back up your player data, " +
-            //                "as there is a chance your data may get corrupted. Please send any issues/bugs you discover with this software to: michaelkellamcs@gmail.com. Thank you!",
-            //                "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("WARNING: This program is still in early development. It is highly recommended to back up your player data, " +
+                            "as there is a chance your data may get corrupted. Please send any issues/bugs you discover with this software to: michaelkellamcs@gmail.com. Thank you!",
+                            "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
 
