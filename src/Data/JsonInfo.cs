@@ -24,6 +24,8 @@ namespace TES3MP_GUI
      * In the future, I may put the game specific modifications to class so that I can keep the JSON
      * stuff separate to make it more modular, but this will do for now.
      * 
+     * NOTE: I have changed the way JSON files are uploaded, so the fixing of apostrophes/quotations are now gone,
+     * since SFTP doesn't need that to happen, I would only need that for when I'm uploading it using echo.
      */
     public static class JsonInfo
     {
