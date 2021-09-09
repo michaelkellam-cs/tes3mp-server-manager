@@ -12,7 +12,7 @@ using System.Threading;
 using System.Diagnostics;
 using TES3MP_GUI.src.Data;
 using TES3MP_GUI.src.Forms.DefaultForms;
-
+using TES3MP_GUI.src.Extra;
 
 namespace TES3MP_GUI
 {
@@ -26,6 +26,8 @@ namespace TES3MP_GUI
     {
 
         private System.Windows.Forms.FormClosedEventHandler earlyExit;
+
+        private bool runGetOutput = true;
 
         public PortalForm()
         {
@@ -98,9 +100,13 @@ namespace TES3MP_GUI
             richTextBox1.Top = (playerButton.Top + playerButton.Height) + 3;
             richTextBox1.Left = (this.ClientSize.Width - richTextBox1.Width) / 2;
 
-            MessageBox.Show("WARNING: This program is still in early development. It is highly recommended to back up your player data, " +
-                            "as there is a chance your data may get corrupted. Please send any issues/bugs you discover with this software to: michaelkellamcs@gmail.com. Thank you!",
-                            "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //MessageBox.Show("WARNING: This program is still in early development. It is highly recommended to back up your player data, " +
+            //                "as there is a chance your data may get corrupted. Please send any issues/bugs you discover with this software to: michaelkellamcs@gmail.com. Thank you!",
+            //                "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+
+            //Debugging.ShowMBox("Added closing capability");
 
             earlyExit = new System.Windows.Forms.FormClosedEventHandler(EarlyExit);
             this.FormClosed += earlyExit;
@@ -180,7 +186,7 @@ namespace TES3MP_GUI
         {
             Stopwatch watch = new Stopwatch();
             watch.Start();
-            while (true)
+            while (runGetOutput)
             {
                 if (watch.ElapsedMilliseconds >= 1000)
                 {
@@ -206,6 +212,7 @@ namespace TES3MP_GUI
 
         private void EarlyExit(object sender, EventArgs e)
         {
+            runGetOutput = false;
             Application.Exit();
         }
     }

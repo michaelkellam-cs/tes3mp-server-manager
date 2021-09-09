@@ -65,12 +65,13 @@ namespace TES3MP_GUI.src.Forms.DefaultForms
 
                 pf.Show();
                 this.Close();
+                
             }
         }
 
         private void EarlyExit(object sender, EventArgs e)
         {
-            Application.Exit();
+            Application.Exit(); 
         }
     }
 }
