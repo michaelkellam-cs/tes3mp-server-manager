@@ -117,8 +117,12 @@ namespace TES3MP_GUI
             jo.EmitCompact = false;
             //System.Console.WriteLine(jo.Emit());
 
-            string fixedStr = jo.Emit().Replace("'", "\\\'");
+            string fixedStr = jo.Emit();
             //SshFunctions.UploadFile(SshFunctions.playerInfo, player + ".json", jo.Emit()/*.Replace("'", "\'")*/);
+
+            //string testingUpload = "I am an uploaded file";
+            //SshFunctions.UploadFileNew(SshFunctions.playerInfo, "newPlayer.json", fixedStr);
+
             return SshFunctions.UploadFile(SshFunctions.playerInfo, player + ".json", fixedStr);
         }
 
@@ -259,7 +263,7 @@ namespace TES3MP_GUI
             }
             //Debugging.PrintArray(skills);
             jo.EmitCompact = false;
-            string fixedStr = jo.Emit().Replace("'", "\\\'");
+            string fixedStr = jo.Emit();
             return SshFunctions.UploadFile(SshFunctions.playerInfo, player + ".json", fixedStr);
         }
 
@@ -331,7 +335,7 @@ namespace TES3MP_GUI
 
                 jo.EmitCompact = false;
 
-                string fixedStr = jo.Emit().Replace("'", "\\\'");
+                string fixedStr = jo.Emit();
                 return SshFunctions.UploadFile(SshFunctions.playerInfo, player + ".json", fixedStr);
             }
             

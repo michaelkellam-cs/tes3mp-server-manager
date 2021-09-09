@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Renci.SshNet;
 using System.IO;
 using System.Threading;
+using TES3MP_GUI.src.Extra;
+using System.Windows.Forms;
 
 namespace TES3MP_GUI
 {
@@ -101,7 +103,11 @@ namespace TES3MP_GUI
             return ExecCommand(finalComm);
         }
 
-        public static bool UploadFile(string directory, string fileName, string file)
+        // Previous way of uploading files. I wasn't comfortable with just echo'ing out the results of the string,
+        // then converting it to a JSON file, so I would recommend using the newer UploadFile method that uses SFTP.
+        // Would not recommend using, but if you do, you will have to change the JsonInfo.cs file to account for apostrophes,
+        // quotations, etc. Really, it would be best to just use the new UploadFile.
+        public static bool UploadFileOld(string directory, string fileName, string file)
         {
             try
             {
@@ -112,6 +118,46 @@ namespace TES3MP_GUI
             {
                 return false;
             }
+        }
+
+        // Uses SFTP to upload file. Converts data into bytes, then uses a MemoryStream to upload.
+        public static bool UploadFile(string directory, string fileName, string fileData)
+        {
+
+            try
+            {
+                PrivateKeyFile privateKey;
+                using (var keyStream = new MemoryStream(Encoding.ASCII.GetBytes(File.ReadAllText(LoginForm.PemFile))))
+                {
+                    privateKey = new PrivateKeyFile(keyStream);
+                }
+                using (var client = new SftpClient(LoginForm.IpAddress, 22, LoginForm.User, privateKey))
+                {
+                    client.Connect();
+
+                    if (client.IsConnected)
+                    {
+                        byte[] byteData = Encoding.UTF8.GetBytes(fileData);
+                        // Debugging.ShowMBox(Encoding.UTF8.GetString(byteData));
+                        using (var ms = new MemoryStream(byteData))
+                        {
+                            ms.Write(byteData, 0, byteData.Length);
+                            ms.Position = 0;
+                            client.UploadFile(ms, directory + "/" + fileName);
+
+                            return true;
+                        }
+                    } 
+
+                    return false;
+                }
+            } catch (Exception err)
+            {
+                System.Console.WriteLine("Unable to upload file");
+                Debugging.ShowMBox(err.ToString());
+                return false;
+            }
+            
         }
 
         /// <summary>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.CodeDom.Compiler;
 using System.IO;
 using System.CodeDom;
+using System.Windows.Forms;
 
 namespace TES3MP_GUI.src.Extra
 {
@@ -33,6 +34,12 @@ namespace TES3MP_GUI.src.Extra
             System.Console.WriteLine(arr[arr.Length - 1] + "]");
         }
 
+        public static void ShowMBox(string message)
+        {
+            MessageBox.Show(message, "Debug MBox", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+
         public static string ToLiteral(string input)
         {
             using (var writer = new StringWriter())
@@ -44,6 +51,7 @@ namespace TES3MP_GUI.src.Extra
                 }
             }
         }
+
     }
 
     
