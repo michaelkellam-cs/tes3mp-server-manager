@@ -303,42 +303,57 @@ namespace TES3MP_GUI
             if (!IsCustomClass(player))
             {
                 System.Console.WriteLine("Creating from previously default player");
-                string js = GetJson(player)
+                
+                try
+                {
+                    string js = GetJson(player)
                     .Replace("\"customClass\":[]", "\"customClass\":{}")
                     .Replace("\"customClass\": [\r\n  ],", "\"customClass\":{}");
-                jo.Load(js);
+                    jo.Load(js);
 
-                jo.ObjectOf("character").SetStringOf("class", "custom");
+                    jo.ObjectOf("character").SetStringOf("class", "custom");
 
-                jo.ObjectOf("customClass").AddIntAt(-1, "specialization", specialization);
-                jo.ObjectOf("customClass").AddStringAt(-1, "minorSkills", minorSkills);
-                jo.ObjectOf("customClass").AddStringAt(-1, "majorAttributes", majorAttributes);
-                jo.ObjectOf("customClass").AddStringAt(-1, "majorSkills", majorSkills);
-                jo.ObjectOf("customClass").AddStringAt(-1, "name", className);
-                jo.ObjectOf("customClass").AddStringAt(-1, "description", description);
+                    jo.ObjectOf("customClass").AddIntAt(-1, "specialization", specialization);
+                    jo.ObjectOf("customClass").AddStringAt(-1, "minorSkills", minorSkills);
+                    jo.ObjectOf("customClass").AddStringAt(-1, "majorAttributes", majorAttributes);
+                    jo.ObjectOf("customClass").AddStringAt(-1, "majorSkills", majorSkills);
+                    jo.ObjectOf("customClass").AddStringAt(-1, "name", className);
+                    jo.ObjectOf("customClass").AddStringAt(-1, "description", description);
 
-                jo.EmitCompact = false;
+                    jo.EmitCompact = false;
 
-                string fixedStr = jo.Emit().Replace("'", "\\\'");
-                return SshFunctions.UploadFile(SshFunctions.playerInfo, player + ".json", fixedStr);
+                    string fixedStr = jo.Emit().Replace("'", "\\\'");
+                    return SshFunctions.UploadFile(SshFunctions.playerInfo, player + ".json", fixedStr);
+                } catch (Exception)
+                {
+                    return false;
+                }
+                
             }
             else
             {
-                System.Console.WriteLine("Creating from previously custom player");
-                string js = GetJson(player);
-                jo.Load(js);
+                try
+                {
+                    System.Console.WriteLine("Creating from previously custom player");
+                    string js = GetJson(player);
+                    jo.Load(js);
 
-                jo.ObjectOf("customClass").SetIntOf("specialization", specialization);
-                jo.ObjectOf("customClass").SetStringOf("minorSkills", minorSkills);
-                jo.ObjectOf("customClass").SetStringOf("majorAttributes", majorAttributes);
-                jo.ObjectOf("customClass").SetStringOf("majorSkills", majorSkills);
-                jo.ObjectOf("customClass").SetStringOf("name", className);
-                jo.ObjectOf("customClass").SetStringOf("description", description);
+                    jo.ObjectOf("customClass").SetIntOf("specialization", specialization);
+                    jo.ObjectOf("customClass").SetStringOf("minorSkills", minorSkills);
+                    jo.ObjectOf("customClass").SetStringOf("majorAttributes", majorAttributes);
+                    jo.ObjectOf("customClass").SetStringOf("majorSkills", majorSkills);
+                    jo.ObjectOf("customClass").SetStringOf("name", className);
+                    jo.ObjectOf("customClass").SetStringOf("description", description);
 
-                jo.EmitCompact = false;
+                    jo.EmitCompact = false;
 
-                string fixedStr = jo.Emit();
-                return SshFunctions.UploadFile(SshFunctions.playerInfo, player + ".json", fixedStr);
+                    string fixedStr = jo.Emit();
+                    return SshFunctions.UploadFile(SshFunctions.playerInfo, player + ".json", fixedStr);
+                } catch (Exception)
+                {
+                    return false;
+                }
+                
             }
             
         }

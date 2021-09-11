@@ -152,7 +152,6 @@ namespace TES3MP_GUI.src.Forms.DataForms
             }
         }
 
-
         // string player, int specialization, string minorSkills, string majorAttributes,
         // string majorSkills, string className, string description
 
@@ -189,24 +188,11 @@ namespace TES3MP_GUI.src.Forms.DataForms
 
             specialization = specCombo.SelectedIndex;
 
+            // I had to originally not allow quotations in the description and class name due to the way I was originally uploading files,
+            // but now, since we're uploading the file using SFTP, quotations are fine.
+
             string className = classTextbox.Text;
             string description = descTextbox.Text;
-
-            //  TODO: Allow quotations. Should be easy but I had problems with it.
-
-            if (className.Contains('\"'))
-            {
-                MessageBox.Show("Your class name cannot contain a quotation mark (\"). Please remove.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            if (description.Contains('\"')) 
-            {
-                MessageBox.Show("Your description cannot contain a quotation mark (\"). Please remove.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            // TODO: Make a backup strategy in case writing the file goes wrong... Either do it here or in the Jsoninfo/SshFunctions class.
 
             bool success = JsonInfo.CreateClass(player, specialization, minorSkills, majorAttributes, majorSkills, className, description);
 
