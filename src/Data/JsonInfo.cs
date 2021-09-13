@@ -375,6 +375,21 @@ namespace TES3MP_GUI
             SshFunctions.UploadFile(SshFunctions.playerInfo, "testing.json", fixedStr);
         }
 
+        public static int GetGender(string player)
+        {
+            JsonDocument jd = JsonDocument.Parse(GetJson(player));
+            int gender = jd.RootElement.GetProperty("character").GetProperty("gender").GetInt32();
+
+            return gender;
+        }
+
+        public static string GetRace(string player)
+        {
+            JsonDocument jd = JsonDocument.Parse(GetJson(player));
+            string race = jd.RootElement.GetProperty("character").GetProperty("race").GetString();
+
+            return Char.ToUpper(race[0]) + race.Substring(1);
+        }
     }
 
     
