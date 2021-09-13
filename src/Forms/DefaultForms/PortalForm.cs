@@ -176,6 +176,7 @@ namespace TES3MP_GUI
             catch (Exception err)
             {
                 System.Console.WriteLine(err.StackTrace);
+                MessageBox.Show("Could not open player data. Please check the JSON file for any errors and try again.", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             
         }
