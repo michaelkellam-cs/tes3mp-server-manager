@@ -131,6 +131,7 @@
     <Compile Include="src\Data\JsonInfo.cs" />
     <Compile Include="src\Data\NoSqlFunctions.cs" />
     <Compile Include="src\Data\PlayerInfo.cs" />
+    <Compile Include="src\Data\RacesGenders.cs" />
     <Compile Include="src\Data\ReadWrite.cs" />
     <Compile Include="src\Data\SshFunctions.cs" />
     <Compile Include="src\Enums\SkillsInfo.cs" />
@@ -240,6 +241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="src\Forms\DataForms\PremadeClassForm.resx">
       <DependentUpon>PremadeClassForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\Forms\DataForms\RacesForm.resx">
+      <DependentUpon>RacesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\Forms\DefaultForms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

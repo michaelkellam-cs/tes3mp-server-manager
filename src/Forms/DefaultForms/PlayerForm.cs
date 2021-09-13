@@ -11,6 +11,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using TES3MP_GUI.DataForms;
+using TES3MP_GUI.src.Data;
 
 namespace TES3MP_GUI
 {
@@ -68,6 +69,10 @@ namespace TES3MP_GUI
                 passButton.Left = loginPanel.Left + (loginPanel.Width / 2) - (passButton.Width / 2);
                 passButton.Top = loginPanel.Top + loginPanel.Height + (passButton.Height / 4);
 
+                raceGenderLabel.Text = RacesGenders.AllGenders[JsonInfo.GetGender(player)] + " " + JsonInfo.GetRace(player);
+                raceGenderLabel.Top = (loginPanel.Top - raceGenderLabel.Height) - 3;
+                raceGenderLabel.Left = loginPanel.Left + ((loginPanel.Width - raceGenderLabel.Width) / 2);
+
                 // Data buttons - middle column
 
                 Button[] dataButtons =
@@ -86,7 +91,7 @@ namespace TES3MP_GUI
 
                 for (int i = 1; i < dataButtons.Length; i++)
                 {
-                    dataButtons[i].Left = dataButtons[0].Left;
+                    dataButtons[i].Left = (this.ClientSize.Width - dataButtons[i].Width) / 2;
                     dataButtons[i].Top = dataButtons[i - 1].Top + dataButtons[i - 1].Height + 8;
                 }
 
@@ -96,7 +101,7 @@ namespace TES3MP_GUI
 
                 diseasesBtn.Hide();
                 levelBtn.Hide();
-                racesButton.Hide();
+                //racesButton.Hide();
                 skillsBtn.Hide();
 
 
@@ -108,7 +113,11 @@ namespace TES3MP_GUI
             
         }
 
-        
+        public void RefreshInfo()
+        {
+            raceGenderLabel.Text = RacesGenders.AllGenders[JsonInfo.GetGender(player)] + " " + JsonInfo.GetRace(player);
+            raceGenderLabel.Left = loginPanel.Left + ((loginPanel.Width - raceGenderLabel.Width) / 2);
+        }
 
         private void passButton_Click(object sender, EventArgs e)
         {
@@ -185,6 +194,19 @@ namespace TES3MP_GUI
         private void levelBtn_Click(object sender, EventArgs e)
         {
             JsonInfo.DeleteCustom(player);
+        }
+
+        private void racesButton_Click(object sender, EventArgs e)
+        {
+            RacesForm rf = new RacesForm(player, this);
+            try
+            {
+                rf.Show();
+                this.Hide();
+            } catch (Exception)
+            {
+
+            }
         }
     }
 }

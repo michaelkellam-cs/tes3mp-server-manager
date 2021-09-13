@@ -360,7 +360,7 @@ namespace TES3MP_GUI
 
         // When going from a custom class character to a default class, it's important to run this
         // method to ensure that it can be transitioned to a custom class if the user wishes to do so
-        // in the future. Otherwise, it would be impossible to create a cusotm class.
+        // in the future. Otherwise, it would be impossible to create a custom class.
         public static void DeleteCustom(string player)
         {
             JsonObject jo = new JsonObject();
@@ -372,6 +372,7 @@ namespace TES3MP_GUI
             jo.EmitCompact = false;
             //System.Console.WriteLine(jo.Emit());
             string fixedStr = jo.Emit().Replace("\"customClass\": [\r\n  ],", "\"customClass\":[]");
+
             SshFunctions.UploadFile(SshFunctions.playerInfo, "testing.json", fixedStr);
         }
 
@@ -389,6 +390,19 @@ namespace TES3MP_GUI
             string race = jd.RootElement.GetProperty("character").GetProperty("race").GetString();
 
             return Char.ToUpper(race[0]) + race.Substring(1);
+        }
+
+        public static bool EditRaceAndGender(string player, int gender, string race)
+        {
+            JsonObject jo = new JsonObject();
+            string js = GetJson(player);
+            jo.Load(js);
+            jo.ObjectOf("character").SetIntOf("gender", gender);
+            jo.ObjectOf("character").SetStringOf("race", race);
+            jo.EmitCompact = false;
+            string fixedStr = jo.Emit();
+
+            return SshFunctions.UploadFile(SshFunctions.playerInfo, player + ".json", fixedStr);
         }
     }
 

@@ -43,6 +43,7 @@
             this.levelBtn = new System.Windows.Forms.Button();
             this.racesButton = new System.Windows.Forms.Button();
             this.skillsBtn = new System.Windows.Forms.Button();
+            this.raceGenderLabel = new System.Windows.Forms.Label();
             this.loginPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -180,12 +181,13 @@
             // 
             // racesButton
             // 
-            this.racesButton.Location = new System.Drawing.Point(359, 213);
+            this.racesButton.Location = new System.Drawing.Point(349, 213);
             this.racesButton.Name = "racesButton";
-            this.racesButton.Size = new System.Drawing.Size(75, 23);
+            this.racesButton.Size = new System.Drawing.Size(94, 23);
             this.racesButton.TabIndex = 10;
-            this.racesButton.Text = "Race";
+            this.racesButton.Text = "Race/Gender";
             this.racesButton.UseVisualStyleBackColor = true;
+            this.racesButton.Click += new System.EventHandler(this.racesButton_Click);
             // 
             // skillsBtn
             // 
@@ -196,11 +198,22 @@
             this.skillsBtn.Text = "Skills";
             this.skillsBtn.UseVisualStyleBackColor = true;
             // 
+            // raceGenderLabel
+            // 
+            this.raceGenderLabel.AutoSize = true;
+            this.raceGenderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.raceGenderLabel.Location = new System.Drawing.Point(71, 140);
+            this.raceGenderLabel.Name = "raceGenderLabel";
+            this.raceGenderLabel.Size = new System.Drawing.Size(89, 16);
+            this.raceGenderLabel.TabIndex = 12;
+            this.raceGenderLabel.Text = "Race Gender";
+            // 
             // PlayerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 450);
+            this.Controls.Add(this.raceGenderLabel);
             this.Controls.Add(this.skillsBtn);
             this.Controls.Add(this.racesButton);
             this.Controls.Add(this.levelBtn);
@@ -238,5 +251,6 @@
         private System.Windows.Forms.Button levelBtn;
         private System.Windows.Forms.Button racesButton;
         private System.Windows.Forms.Button skillsBtn;
+        private System.Windows.Forms.Label raceGenderLabel;
     }
 }
