@@ -193,7 +193,7 @@ namespace TES3MP_GUI
 
         private void levelBtn_Click(object sender, EventArgs e)
         {
-            JsonInfo.DeleteCustom(player);
+            //JsonInfo.DeleteCustom(player);
         }
 
         private void racesButton_Click(object sender, EventArgs e)

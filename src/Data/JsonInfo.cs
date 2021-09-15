@@ -358,24 +358,6 @@ namespace TES3MP_GUI
             
         }
 
-        // When going from a custom class character to a default class, it's important to run this
-        // method to ensure that it can be transitioned to a custom class if the user wishes to do so
-        // in the future. Otherwise, it would be impossible to create a custom class.
-        public static void DeleteCustom(string player)
-        {
-            JsonObject jo = new JsonObject();
-            string js = GetJson(player).Replace("\"customClass\":[]", "\"customClass\":{}");
-            jo.Load(js);
-
-            jo.Delete("customClass");
-            jo.AddArrayAt(3, "customClass");
-            jo.EmitCompact = false;
-            //System.Console.WriteLine(jo.Emit());
-            string fixedStr = jo.Emit().Replace("\"customClass\": [\r\n  ],", "\"customClass\":[]");
-
-            SshFunctions.UploadFile(SshFunctions.playerInfo, "testing.json", fixedStr);
-        }
-
         public static int GetGender(string player)
         {
             JsonDocument jd = JsonDocument.Parse(GetJson(player));

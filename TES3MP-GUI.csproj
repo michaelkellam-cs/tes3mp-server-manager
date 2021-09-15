@@ -178,6 +178,7 @@
     <Compile Include="src\Forms\DataForms\LevelsForm.Designer.cs">
       <DependentUpon>LevelsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\Forms\DataForms\PlayerModels.cs" />
     <Compile Include="src\Forms\DataForms\PremadeClassForm.cs">
       <SubType>Form</SubType>
     </Compile>
