@@ -404,6 +404,31 @@ namespace TES3MP_GUI
 
             return SshFunctions.UploadFile(SshFunctions.playerInfo, player + ".json", fixedStr);
         }
+
+        public static string[] GetModels(string player)
+        {
+            JsonDocument jd = JsonDocument.Parse(GetJson(player));
+            string headModel = jd.RootElement.GetProperty("character").GetProperty("head").GetString();
+            string hairModel = jd.RootElement.GetProperty("character").GetProperty("hair").GetString();
+
+            return new string[]
+            {
+                headModel, hairModel
+            };
+        }
+
+        public static bool EditModels(string player, string headModel, string hairModel)
+        {
+            JsonObject jo = new JsonObject();
+            string js = GetJson(player);
+            jo.Load(js);
+            jo.ObjectOf("character").SetStringOf("head", headModel);
+            jo.ObjectOf("character").SetStringOf("hair", hairModel);
+            jo.EmitCompact = false;
+            string fixedStr = jo.Emit();
+
+            return SshFunctions.UploadFile(SshFunctions.playerInfo, player + ".json", fixedStr);
+        }
     }
 
     
